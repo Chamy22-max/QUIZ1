@@ -80,5 +80,6 @@ public class Producto {
     }
 
     public void reponerStock(int cantidadReponer) {
+
     }
 }

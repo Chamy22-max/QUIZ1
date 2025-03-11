@@ -13,7 +13,7 @@ public class Main {
             System.out.println("2. Vender Producto");
             System.out.println("3. Reponer Stock");
             System.out.println("4. Aplicar Descuento del 2%");
-            System.out.println("5. Mostrar Información de un producto");
+            System.out.println("5. Mostrar Información de un Producto");
             System.out.println("6. Aumentar Precio a un 6%");
             System.out.println("7. Calcular Valor Total en Inventario");
             System.out.println("8. Eliminar Producto por Código");
@@ -38,9 +38,12 @@ public class Main {
                         double precio1 = scanner.nextDouble();
                         System.out.print("Stock: ");
                         int stock1 = scanner.nextInt();
+                        if (stock1 < 0) {
+                            System.out.println("Error!! Valor no vaido.");
+                        }
                         scanner.nextLine();
                         Producto.crearProducto(codigo1, nombre1, precio1, stock1);
-                        System.out.println("Ha creado su producto");
+                        System.out.println("Producto creado con exito");
                     }
                     break;
 
@@ -49,8 +52,14 @@ public class Main {
                     String codigoVender = scanner.nextLine();
                     Producto productoVender = buscarProductoPorCodigo(codigoVender);
                     if (productoVender != null) {
-                        System.out.print("Ingrese la cantidad a vender: ");
-                        int cantidadVender = scanner.nextInt();
+                        int cantidadVender = -1;
+                        while (cantidadVender < 0) {
+                            System.out.print("Ingrese la cantidad a vender: ");
+                            cantidadVender = scanner.nextInt();
+                            if (cantidadVender < 0) {
+                                System.out.println("Error!! Valor no vaido.");
+                            }
+                        }
                         productoVender.venderProducto(cantidadVender);
                     } else {
                         System.out.println("Producto no encontrado.");
@@ -62,13 +71,21 @@ public class Main {
                     String codigoReponer = scanner.nextLine();
                     Producto productoReponer = buscarProductoPorCodigo(codigoReponer);
                     if (productoReponer != null) {
-                        System.out.print("Ingrese la cantidad a reponer: ");
-                        int cantidadReponer = scanner.nextInt();
+                        int cantidadReponer = -1;
+                        while (cantidadReponer < 0) {
+                            System.out.print("Ingrese la cantidad a reponer: ");
+                            cantidadReponer = scanner.nextInt();
+                            if (cantidadReponer < 0) {
+                                System.out.println("Error!! Valor no válido..");
+                            }
+                        }
                         productoReponer.reponerStock(cantidadReponer);
+                        System.out.println("Stock actualizado correctamente.");
                     } else {
                         System.out.println("Producto no encontrado.");
                     }
                     break;
+
 
                 case 4:
                     System.out.print("Código del producto para aplicar descuento: ");
