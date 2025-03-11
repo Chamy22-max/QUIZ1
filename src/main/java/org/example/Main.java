@@ -26,26 +26,40 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("Ingrese los datos del producto:");
-                    System.out.print("Código: ");
-                    String codigo1 = scanner.nextLine();
+                    String codigo1;
+                    while (true) {
+                        System.out.print("Código: ");
+                        codigo1 = scanner.nextLine();
 
-                    if (existeCodigo(codigo1)) {
-                        System.out.println("Error!! Este Codigo ya existe");
-                    } else {
-                        System.out.print("Nombre: ");
-                        String nombre1 = scanner.nextLine();
-                        System.out.print("Precio: ");
-                        double precio1 = scanner.nextDouble();
-                        System.out.print("Stock: ");
-                        int stock1 = scanner.nextInt();
-                        if (stock1 < 0) {
-                            System.out.println("Error!! Valor no vaido.");
+                        if (codigo1.matches("\\d+")) {
+                            if (existeCodigo(codigo1)) {
+                                System.out.println("Error!! Este Código ya existe");
+                                continue;
+                            }
+                            break;
+                        } else {
+                            System.out.println("Error!! El código debe ser un número válido.");
                         }
+                    }
+
+                    System.out.print("Nombre: ");
+                    String nombre1 = scanner.nextLine();
+
+                    System.out.print("Precio: ");
+                    double precio1 = scanner.nextDouble();
+
+                    System.out.print("Stock: ");
+                    int stock1 = scanner.nextInt();
+
+                    if (stock1 < 0) {
+                        System.out.println("Error!! Valor de stock no válido.");
+                    } else {
                         scanner.nextLine();
                         Producto.crearProducto(codigo1, nombre1, precio1, stock1);
-                        System.out.println("Producto creado con exito");
+                        System.out.println("Producto creado con éxito");
                     }
                     break;
+
 
                 case 2:
                     System.out.print("Código del producto a vender: ");
